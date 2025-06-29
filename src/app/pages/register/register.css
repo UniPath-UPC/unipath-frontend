@@ -1,0 +1,170 @@
+.register-container {
+  display: flex;
+  height: 100vh;
+  background-color: var(--background-color);
+  overflow: hidden;
+}
+
+/* FORMULARIO */
+.form-section {
+  width: 60%;
+  height: 100vh;
+  overflow: hidden;
+  background-color: var(--background-color);
+}
+
+.form-scroll {
+  height: 100%;
+  overflow-y: auto;
+  padding: 2rem;
+  display: flex;
+  justify-content: center;
+  /* Scroll invisible en Firefox */
+  scrollbar-width: none;
+}
+
+/* Scroll invisible en Chrome/WebKit */
+.form-scroll::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+}
+
+.register-form {
+  width: 100%;
+  max-width: 500px;
+}
+
+.form-header {
+  margin-bottom: 2rem;
+}
+
+.form-title {
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--primary-color);
+}
+
+.form-subtitle {
+  font-size: 1rem;
+  color: #666;
+}
+
+.form-label {
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  display: block;
+}
+
+.form-control {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  border: 2px solid var(--highlight-blue);
+  border-radius: 12px;
+  background-color: var(--light-input);
+}
+
+.form-control:focus {
+  border-color: var(--accent-color);
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(174, 221, 43, 0.2);
+}
+
+small.valid {
+  color: var(--green-true-color);
+}
+
+small.invalid {
+  color: var(--red-false-color);
+}
+
+.btn-register {
+  background-color: var(--primary-color);
+  color: white;
+  border: none;
+  padding: 0.8rem;
+  border-radius: 10px;
+  font-weight: bold;
+  font-size: 1rem;
+  transition: background-color 0.3s ease;
+  margin-bottom: 2rem;
+}
+
+.btn-register:hover {
+  background-color: var(--dark-blue);
+}
+select.form-control {
+  appearance: none;
+  background-image: url("data:image/svg+xml;utf8,<svg fill='gray' height='16' viewBox='0 0 24 24' width='16' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/></svg>");
+  background-repeat: no-repeat;
+  background-position: right 1rem center;
+  background-size: 1rem;
+}
+.requiredText {
+  color: var(--red-false-color);
+  font-weight: bold;
+}
+
+
+/* CARRUSEL */
+.register-carousel {
+  width: 50%;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  background-color: var(--background-color);
+  overflow: hidden;
+}
+
+.carousel-card {
+  background: white;
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+  border-radius: 16px;
+  padding: 2rem;
+  width: 100%;
+  max-width: 400px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  animation: slideInLeft 0.8s ease-out;
+}
+
+.carousel-title {
+  font-size: 1.6rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  color: var(--primary-color);
+}
+
+.carousel-description {
+  font-size: 1rem;
+  color: #444;
+  line-height: 1.5;
+}
+
+.carousel-image {
+  margin-top: 2rem;
+  text-align: center;
+}
+
+.carousel-image img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* ANIMACIONES */
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.animate-slide-in {
+  animation: slideInLeft 0.8s ease-out both;
+}

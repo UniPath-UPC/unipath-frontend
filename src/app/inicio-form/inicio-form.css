@@ -1,0 +1,88 @@
+
+.inicio-form-container {
+  height: 100vh;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--background-color);
+  padding: 2rem;
+}
+
+.inicio-form-content {
+  max-width: 800px;
+  width: 100%;
+}
+
+.inicio-form-title {
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--primary-color);
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+.inicio-form-description {
+  font-size: 1.1rem;
+  color: #444;
+  text-align: center;
+  margin-bottom: 3rem;
+  line-height: 1.6;
+}
+
+.inicio-form-row {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.inicio-form-row .icon img {
+  width: 50px;
+  height: 50px;
+  object-fit: contain;
+}
+
+.row-text {
+  font-size: 1rem;
+  color: #333;
+  line-height: 1.4;
+}
+
+.inicio-form-buttons {
+  margin-top: 2rem;
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.btn {
+  padding: 0.75rem 1.5rem;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border: none;
+}
+
+.btn-start {
+  background-color: var(--accent-color);
+  color: #000;
+}
+
+.btn-start:hover {
+  background-color: #cce92f;
+}
+
+.btn-back {
+  background-color: transparent;
+  color: var(--primary-color);
+  border: 2px solid var(--primary-color);
+}
+
+.btn-back:hover {
+  background-color: var(--primary-color);
+  color: white;
+}

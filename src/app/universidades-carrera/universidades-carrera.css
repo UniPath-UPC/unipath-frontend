@@ -1,0 +1,46 @@
+.universidades-wrapper {
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.logo-universidad {
+  height: 60px;
+  width: auto;
+  object-fit: contain;
+}
+
+.accordion-body {
+  border-radius: 1rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  padding: 1.5rem;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  transition: background-color 0.3s ease;
+}
+
+.accordion .accordion-item {
+  border: none; /* remueve bordes duplicados */
+  margin-bottom: 1rem;
+}
+
+.accordion-item {
+  border-radius: 1rem;
+  overflow: hidden;
+}
+.accordion-button {
+  border-radius: 0.5rem;
+  transition: background-color 0.3s ease, border-left 0.3s ease;
+  border-left: 8px solid transparent;
+}
+
+.accordion-button:not(.collapsed) {
+  font-weight: 600;
+  box-shadow: inset 0 0 4px rgba(0, 0, 0, 0.1);
+}
+
+.btn-link {
+  background-color: var(--dark-blue);
+  color: #fff;
+  text-decoration: none;
+}
+

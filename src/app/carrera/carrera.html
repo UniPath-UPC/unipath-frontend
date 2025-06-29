@@ -1,0 +1,21 @@
+<div class="carrera-container">
+    <div *ngIf="carrera" class="carrera-container">
+  <h1 class="carrera-title">{{ carrera.name }}</h1>
+
+  <div class="carrera-content d-flex flex-wrap align-items-center justify-content-between gap-4">
+    <div class="carrera-description">
+      <p>{{ carrera.description }}</p>
+    </div>
+    <div class="carrera-image">
+      <img [src]="carrera.imageUrl" alt="Imagen de la carrera {{ carrera.name }}" />
+    </div>
+  </div>
+
+  <div class="carrera-actions d-flex justify-content-center gap-3 mt-5">
+    <button class="btn  btn-regresar" (click)="volver()">Regresar</button>
+    <button class="btn  btn-donde">¿Dónde puedo estudiar?</button>
+  </div>
+</div>
+
+
+</div>

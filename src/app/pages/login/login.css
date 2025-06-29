@@ -1,0 +1,241 @@
+
+
+.login-container {
+  display: flex;
+  height: 100vh;
+  background-color: var(--background-color);
+  overflow: hidden;
+}
+
+.carousel-section {
+  width: 50%;
+  background-color: var(--background-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+}
+
+.carousel-card {
+  background: white;
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+  border-radius: 16px;
+  padding: 2rem;
+  width: 100%;
+  height: auto;
+  margin: 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  position: relative;
+}
+
+
+.carousel-header {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.back-button {
+  background-color: var(--dark-blue);
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.back-button:hover {
+  background-color: var(--primary-color);
+}
+
+.carousel-body {
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+}
+
+.carousel-title {
+  font-size: 1.6rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  color: #000;
+}
+
+.carousel-description {
+  font-size: 1rem;
+  color: #333;
+  line-height: 1.5;
+}
+
+.carousel-image {
+  text-align: center;
+  margin-top: auto;
+  padding: 2rem 1rem;
+}
+
+.carousel-image img {
+  max-width: 70%;
+  height: auto;
+}
+
+/* Indicadores */
+.carousel-indicators {
+  position: absolute;
+  bottom: 1rem;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0;
+  margin: 0;
+  z-index: 10;
+}
+
+
+.carousel-indicators button {
+  width: 10px;
+  height: 10px;
+  background-color: #cbd5e0;
+  border-radius: 50%;
+  border: none;
+  transition: background-color 0.3s ease;
+}
+
+.carousel-indicators .active {
+  background-color: var(--primary-color);
+}
+.carousel-indicators button:hover {
+  background-color: var(--primary-color);
+}
+
+/* Formulario */
+.form-section {
+  width: 50%;
+  background-color: var(--background-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+}
+
+.login-form {
+  background: var(--background-color); /* coincidir con fondo principal */
+  padding: 2rem;
+  border-radius: 0; 
+  box-shadow: none; 
+  border: none; 
+  width: 100%;
+  max-width: 600px;
+  max-height: 90vh;
+  overflow-y: auto;
+}
+
+
+
+.form-title {
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--primary-color);
+}
+.form-title-accent {
+  color: var(--accent-color);
+}
+
+.form-subtitle {
+  color: #666;
+  font-size: 1rem;
+  margin-bottom: 1rem;
+}
+
+.form-label {
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  display: block;
+}
+
+.input-wrapper {
+  position: relative;
+}
+
+.input-icon {
+  position: absolute;
+  top: 50%;
+  left: 1rem;
+  transform: translateY(-50%);
+  color: #999;
+}
+
+.form-control {
+  width: 100%;
+  padding: 0.75rem 1rem 0.75rem 3rem;
+  border: 2px solid var(--highlight-blue);
+  border-radius: 12px;
+  background-color: var(--light-input);
+}
+
+.form-control:focus {
+  outline: none;
+  border-color: var(--accent-color);
+  box-shadow: 0 0 0 3px rgba(174, 221, 43, 0.3);
+}
+
+.password-toggle {
+  position: absolute;
+  right: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #999;
+}
+
+.btn-login {
+  background-color: var(--primary-color);
+  color: white;
+  padding: 0.75rem;
+  border: none;
+  border-radius: 12px;
+  font-weight: bold;
+  font-size: 1rem;
+  transition: background 0.3s ease;
+}
+
+.btn-login:hover {
+  background-color: var(--dark-blue);
+}
+
+.forgot-link,
+.signup-link {
+  color: var(--primary-color);
+  text-decoration: none;
+}
+
+.forgot-link:hover,
+.signup-link:hover {
+  text-decoration: underline;
+  color: var(--dark-blue);
+}
+
+
+@media (max-width: 768px) {
+  .login-container {
+    flex-direction: column;
+  }
+
+  .carousel-section {
+    display: none;
+  }
+
+  .form-section {
+    width: 100%;
+    padding: 1rem;
+  }
+
+  .login-form {
+    padding: 2rem 1rem;
+  }
+}

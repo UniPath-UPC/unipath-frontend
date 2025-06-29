@@ -1,0 +1,72 @@
+<div class="universidades-wrapper container py-5">
+  <h1 class="mb-3">¿Dónde puedo estudiar {{ nombreCarrera }}?</h1>
+  <p class="mb-5">
+    A continuación te mostramos en qué universidades puedes estudiar
+    <strong>{{ nombreCarrera }}</strong>.
+  </p>
+
+  <div class="accordion" id="accordionUniversidades">
+    <div
+      class="accordion-item"
+      *ngFor="let uni of universidades; let i = index"
+    >
+      <h2 class="accordion-header" [id]="'heading' + i">
+        <button
+          class="accordion-button d-flex align-items-center gap-3"
+          [ngClass]="{ 'collapsed': activo !== i }"
+          [ngStyle]="{
+    'border-left': '8px solid ' + uni.color,
+    'background-color': hexToRGBA(uni.color, 0.1)
+  }"
+          type="button"
+          data-bs-toggle="collapse"
+          [attr.data-bs-target]="'#collapse' + i"
+          [attr.aria-expanded]="activo === i"
+          [attr.aria-controls]="'collapse' + i"
+          (click)="activo = (activo === i ? null : i)"
+        >
+          <img
+            [src]="uni.logoUrl"
+            alt="Logo de {{ uni.universityName }}"
+            class="logo-universidad"
+          />
+          <span>{{ uni.universityName }}</span>
+        </button>
+      </h2>
+      <div
+        [id]="'collapse' + i"
+        class="accordion-collapse collapse"
+        [attr.aria-labelledby]="'heading' + i"
+        data-bs-parent="#accordionUniversidades"
+      >
+        <div
+          class="accordion-body"
+          [ngStyle]="{ 'background-color': hexToRGBA(uni.color, 0.4) }"
+        >
+          <div class="row align-items-center">
+            <div class="col-md-6">
+              <p>{{ uni.universityDescription }}</p>
+            </div>
+            <div class="col-md-6 text-center">
+              <img
+                [src]="uni.universityImageUrl"
+                alt="Imagen de {{ uni.universityName }}"
+                class="img-fluid rounded shadow"
+              />
+            </div>
+          </div>
+          <div class="text-end mt-3">
+            <a [href]="uni.websiteUrl" class="btn btn-link" target="_blank"
+              >Ir al sitio de la universidad</a
+            >
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="text-center mt-5">
+    <button class="btn btn-outline-secondary" (click)="volverAResultados()">
+      ← Volver a resultados
+    </button>
+  </div>
+</div>

@@ -1,0 +1,131 @@
+<div class="background">
+    <div class="test-container">
+        <h2 class="test-title">Encuesta</h2>
+        <p class="test-instructions">Recuerda responder con calma las preguntas, no hay tiempo límite</p>
+        <!-- Progress Bar -->
+        <div class="progress-bar-container">
+            <div class="progress-bar-fill" [style.width.%]="progressPercentage"></div>
+        </div>
+
+        <!-- Preguntas -->
+        <ul class="question-list" *ngIf="currentPage < totalPages - 1">
+            <li *ngFor="let question of pagedQuestions; let i = index">
+                <label>{{ (currentPage * pageSize) + i + 1 }}. {{ question }}</label>
+                <div class="options">
+                    <label>
+                        <input type="radio" [name]="'q' + ((currentPage * pageSize) + i)" [value]="1"
+                            [(ngModel)]="selectedAnswers[(currentPage * pageSize) + i]"
+                            (change)="setAnswer((currentPage * pageSize) + i, 1)" /> Sí
+                    </label>
+                    <label>
+                        <input type="radio" [name]="'q' + ((currentPage * pageSize) + i)" [value]="0"
+                            [(ngModel)]="selectedAnswers[(currentPage * pageSize) + i]"
+                            (change)="setAnswer((currentPage * pageSize) + i, 0)" /> No
+                    </label>
+                </div>
+
+            </li>
+        </ul>
+
+
+        <div *ngIf="currentPage === totalPages - 1" class="extra-questions-wrapper">
+            <div class="extra-questions-scroll">
+                <div class="extra-questions">
+                    <!-- Género -->
+                    <label>Género</label>
+                    <select [(ngModel)]="respuestasExtra.genero" class="form-control">
+                        <option value="" disabled selected>Selecciona tu género</option>
+                        <option *ngFor="let genero of generos" [value]="genero">{{ genero }}</option>
+                    </select>
+
+                    <!-- Distrito -->
+                    <label>Distrito</label>
+                    <select [(ngModel)]="respuestasExtra.distrito" class="form-control">
+                        <option value="" disabled selected>Selecciona tu distrito</option>
+                        <option *ngFor="let distrito of distritos" [value]="distrito">{{ distrito }}</option>
+                    </select>
+
+                    <!-- Tipo de escuela -->
+                    <label>Tipo de escuela</label>
+                    <select [(ngModel)]="respuestasExtra.tipoEscuela" class="form-control">
+                        <option value="" disabled selected>Selecciona tipo de escuela</option>
+                        <option *ngFor="let tipo of tiposEscuela" [value]="tipo">{{ tipo }}</option>
+                    </select>
+
+                    <!-- Cursos preferidos -->
+                    <label>Curso preferido 1</label>
+                    <select [(ngModel)]="respuestasExtra.curso1" class="form-control">
+                        <option value="" disabled selected>Selecciona</option>
+                        <option *ngFor="let curso of cursos" [value]="curso">{{ curso }}</option>
+                    </select>
+
+                    <label>Curso preferido 2</label>
+                    <select [(ngModel)]="respuestasExtra.curso2" class="form-control">
+                        <option value="" disabled selected>Selecciona</option>
+                        <option *ngFor="let curso of cursos" [value]="curso">{{ curso }}</option>
+                    </select>
+
+                    <label>Curso preferido 3</label>
+                    <select [(ngModel)]="respuestasExtra.curso3" class="form-control">
+                        <option value="" disabled selected>Selecciona</option>
+                        <option *ngFor="let curso of cursos" [value]="curso">{{ curso }}</option>
+                    </select>
+
+                    <!-- Escalas del 1 al 10 -->
+                    <label>¿Qué tan empático te consideras?</label>
+
+                    <input type="range" min="1" max="10" [(ngModel)]="respuestasExtra.empatia" class="form-range" />
+                    <div class="range-scale">
+                        <span *ngFor="let n of rangeLabels">{{ n }}</span>
+                    </div>
+                    <small class="range-hint">Donde 1 es Muy Malo y 10 es Muy Bueno</small>
+
+                    <label>¿Qué tan bueno te consideras escuchando a otras personas?</label>
+                    <input type="range" min="1" max="10" [(ngModel)]="respuestasExtra.escucha" class="form-range" />
+                    <div class="range-scale">
+                        <span *ngFor="let n of rangeLabels">{{ n }}</span>
+                    </div>
+                    <small class="range-hint">Donde 1 es Muy Malo y 10 es Muy Bueno</small>
+
+                    <label>¿Qué tan bueno te consideras solucionando problemas complejos?</label>
+                    <input type="range" min="1" max="10" [(ngModel)]="respuestasExtra.resolucion" class="form-range" />
+                    <div class="range-scale">
+                        <span *ngFor="let n of rangeLabels">{{ n }}</span>
+                    </div>
+                    <small class="range-hint">Donde 1 es Muy Malo y 10 es Muy Bueno</small>
+
+                    <label>¿Qué tan asertivo te consideras al comunicarte con otras personas?</label>
+                    <input type="range" min="1" max="10" [(ngModel)]="respuestasExtra.asertividad" class="form-range" />
+                    <div class="range-scale">
+                        <span *ngFor="let n of rangeLabels">{{ n }}</span>
+                    </div>
+                    <small class="range-hint">Donde 1 es Muy Malo y 10 es Muy Bueno</small>
+
+                    <label>¿Qué tan bueno te consideras al trabajar en equipo?</label>
+                    <input type="range" min="1" max="10" [(ngModel)]="respuestasExtra.trabajoEquipo"
+                        class="form-range" />
+                    <div class="range-scale">
+                        <span *ngFor="let n of rangeLabels">{{ n }}</span>
+                    </div>
+                    <small class="range-hint">Donde 1 es Muy Malo y 10 es Muy Bueno</small>
+
+                    <!-- Pago -->
+                    <label>¿Cuánto dinero estarías dispuesto a pagar por mensualidad? (en soles)</label>
+                    <input type="number" [(ngModel)]="respuestasExtra.pagoMensual" class="form-control" min="0" />
+
+                </div>
+            </div>
+        </div>
+
+        <!-- Navegación -->
+        <div class="pagination-buttons">
+            <button class="btn-back" (click)="prevPage()" [disabled]="currentPage === 0">Atrás</button>
+
+            <button class="btn-next" (click)="currentPage === totalPages - 1 ? enviarRespuestas() : nextPage()">
+                {{ currentPage === totalPages - 1 ? 'Finalizar' : 'Siguiente' }}
+            </button>
+
+
+        </div>
+    </div>
+</div>

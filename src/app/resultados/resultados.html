@@ -1,0 +1,70 @@
+<div class="resultados-wrapper">
+  <div class="resultados-container">
+    <h1 class="resultados-title">Informe de resultados</h1>
+
+    <section class="datos-encuestado">
+      <section class="datos-encuestado">
+        <h2><strong>Datos del encuestado</strong></h2>
+        <p><strong>Nombre:</strong> {{ nombreUsuario }}</p>
+        <p><strong>Edad:</strong> {{ edad }} años</p>
+        <p><strong>Fecha de la encuesta:</strong> {{ fecha }}</p>
+      </section>
+    </section>
+    <section class="resumen-section">
+      <h2
+        class="d-flex flex-direction-row align-items-center justify-content-between"
+      >
+        <strong>
+          Resumen
+
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="20"
+            height="20"
+            fill="currentColor"
+            class="bi bi-question-circle"
+            viewBox="0 0 16 16"
+          >
+            <path
+              d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"
+            />
+            <path
+              d="M5.255 5.786a.237.237 0 0 0 .241.247h.825c.138 0 .248-.113.266-.25.09-.656.54-1.134 1.342-1.134.686 0 1.314.343 1.314 1.168 0 .635-.374.927-.965 1.371-.673.489-1.206 1.06-1.168 1.987l.003.217a.25.25 0 0 0 .25.246h.811a.25.25 0 0 0 .25-.25v-.105c0-.718.273-.927 1.01-1.486.609-.463 1.244-.977 1.244-2.056 0-1.511-1.276-2.241-2.673-2.241-1.267 0-2.655.59-2.75 2.286m1.557 5.763c0 .533.425.927 1.01.927.609 0 1.028-.394 1.028-.927 0-.552-.42-.94-1.029-.94-.584 0-1.009.388-1.009.94"
+            />
+          </svg>
+        </strong>
+      </h2>
+
+      <div
+        class="carreras-wrapper"
+        [class.expandido]="opcionSeleccionada !== null"
+      >
+        <div class="carreras-recomendadas">
+          <div
+            class="opcion-carrera"
+            *ngFor="let carrera of recomendaciones; let i = index"
+            [ngClass]="'opcion-' + (i + 1)"
+            (click)="mostrarDetalle(i)"
+          >
+            <div>
+              <p class="opcion-titulo">
+                <strong>Opción {{ i + 1 }}:</strong> {{ carrera.nameCareer }}
+              </p>
+              <p class="opcion-porcentaje">{{ carrera.hitRate }}%</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="detalle-carrera" *ngIf="opcionSeleccionada !== null">
+          <h3>{{ detalleCarrera.titulo }}</h3>
+          <div class="botones-detalle">
+            <button class="btn-accion" (click)="irACarrera()">
+              Ver carrera
+            </button>
+            <button class="btn-accion btn-secundario" (click)="irAUniversidades()">Ver universidades</button>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+</div>

@@ -1,0 +1,16 @@
+/*Paleta de colores a utilizar*/
+:root {
+  --primary-color: #0A5483;
+  --background-color: #F8F8EC;
+  --green-accent-color: #63AA3A;
+  --accent-color: #AEDD2B;
+  --dark-blue: #02416D;
+  --highlight-blue: #066699;
+  --light-input: #f8f9fa;
+  --green-true-color: #055B52;
+  --red-false-color: #B2352F;
+}
+
+* {
+  font-family: 'Inter', sans-serif;
+}
