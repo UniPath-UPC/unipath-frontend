@@ -5,77 +5,172 @@
       <div class="register-form">
         <div class="form-header text-center mb-4">
           <h2 class="form-title">Crea tu cuenta UniPath</h2>
-          <p class="form-subtitle">Completa los campos para empezar tu camino</p>
+          <p class="form-subtitle">
+            Completa los campos para empezar tu camino
+          </p>
         </div>
 
-        <form class="register-form-content" #form="ngForm" (ngSubmit)="onSubmit(form)">
-          <!-- Nombre completo -->
+        <form
+          class="register-form-content"
+          #form="ngForm"
+          (ngSubmit)="onSubmit(form)"
+        >
+          <!-- Nombres -->
           <div class="form-group mb-3">
-            <label for="fullname" class="form-label">Nombre completo<span class="requiredText">*</span></label>
-            <input type="text" class="form-control" id="fullname" placeholder="Tu nombre completo" name="fullname"
-              [(ngModel)]="fullname" required />
+            <label for="name" class="form-label"
+              >Nombres<span class="requiredText">*</span></label
+            >
+            <input
+              type="text"
+              class="form-control"
+              id="name"
+              placeholder="Tus nombres"
+              name="name"
+              [(ngModel)]="name"
+              required
+            />
+          </div>
+
+          <!-- Apellidos -->
+          <div class="form-group mb-3">
+            <label for="lastName" class="form-label"
+              >Apellidos<span class="requiredText">*</span></label
+            >
+            <input
+              type="text"
+              class="form-control"
+              id="lastName"
+              placeholder="Tus apellidos"
+              name="lastName"
+              [(ngModel)]="lastName"
+              required
+            />
           </div>
 
           <!-- Correo electrónico -->
           <div class="form-group mb-3">
-            <label for="email" class="form-label">Correo electrónico<span class="requiredText">*</span></label>
-            <input type="email" class="form-control" id="email" placeholder="tu@correo.com" name="email"
-              [(ngModel)]="email" required />
+            <label for="email" class="form-label"
+              >Correo electrónico<span class="requiredText">*</span></label
+            >
+            <input
+              type="email"
+              class="form-control"
+              id="email"
+              placeholder="tu@correo.com"
+              name="email"
+              [(ngModel)]="email"
+              required
+            />
           </div>
           <!-- Contraseña -->
           <div class="form-group mb-2">
-            <label for="password" class="form-label">Contraseña<span class="requiredText">*</span></label>
-            <input type="password" class="form-control" id="password" name="password" [(ngModel)]="password"
-              placeholder="Contraseña" (input)="validatePassword()" required />
+            <label for="password" class="form-label"
+              >Contraseña<span class="requiredText">*</span></label
+            >
+            <input
+              type="password"
+              class="form-control"
+              id="password"
+              name="password"
+              [(ngModel)]="password"
+              placeholder="Contraseña"
+              (input)="validatePassword()"
+              required
+            />
             <div *ngIf="passwordTouched" class="mt-1">
-              <small [ngClass]="{ 'valid': isLengthValid, 'invalid': !isLengthValid }">
+              <small
+                [ngClass]="{ 'valid': isLengthValid, 'invalid': !isLengthValid }"
+              >
                 • Mínimo 8 caracteres
               </small>
-              <br>
-              <small [ngClass]="{ 'valid': hasUppercase, 'invalid': !hasUppercase }">
+              <br />
+              <small
+                [ngClass]="{ 'valid': hasUppercase, 'invalid': !hasUppercase }"
+              >
                 • Al menos una mayúscula
               </small>
             </div>
           </div>
           <!-- Repetir contraseña -->
           <div class="form-group mb-3">
-            <label for="confirm-password" class="form-label">Repetir contraseña<span
-                class="requiredText">*</span></label>
-            <input type="password" class="form-control" id="confirm-password" placeholder="Repite tu contraseña"
-              name="confirmPassword" [(ngModel)]="confirmPassword" required />
+            <label for="confirm-password" class="form-label"
+              >Repetir contraseña<span class="requiredText">*</span></label
+            >
+            <input
+              type="password"
+              class="form-control"
+              id="confirm-password"
+              placeholder="Repite tu contraseña"
+              name="confirmPassword"
+              [(ngModel)]="confirmPassword"
+              required
+            />
           </div>
 
           <!-- Fecha de nacimiento -->
           <div class="form-group mb-3">
-            <label for="birthdate" class="form-label">Fecha de nacimiento<span class="requiredText">*</span></label>
-            <input type="date" class="form-control" id="birthdate" name="birthdate" [(ngModel)]="birthdate" required />
+            <label for="birthdate" class="form-label"
+              >Fecha de nacimiento<span class="requiredText">*</span></label
+            >
+            <input
+              type="date"
+              class="form-control"
+              id="birthdate"
+              name="birthdate"
+              [(ngModel)]="birthdate"
+              required
+            />
           </div>
 
           <!-- Colegio -->
           <div class="form-group mb-4">
-            <label for="school" class="form-label">Nombre del colegio<span class="requiredText">*</span></label>
-            <input type="text" class="form-control" id="school" placeholder="Nombre de tu colegio" name="school"
-              [(ngModel)]="school" required />
+            <label for="school" class="form-label"
+              >Nombre del colegio<span class="requiredText">*</span></label
+            >
+            <input
+              type="text"
+              class="form-control"
+              id="school"
+              placeholder="Nombre de tu colegio"
+              name="school"
+              [(ngModel)]="school"
+              required
+            />
           </div>
           <!--ROL COLEGIO FALTA-->
           <!-- Rol -->
           <div class="form-group mb-4">
-            <label for="role" class="form-label">Rol<span class="requiredText">*</span></label>
-            <select class="form-control" id="role" name="role" [(ngModel)]="selectedRole" required>
+            <label for="role" class="form-label"
+              >Rol<span class="requiredText">*</span></label
+            >
+            <select
+              class="form-control"
+              id="role"
+              name="role"
+              [(ngModel)]="selectedRole"
+              required
+            >
               <option value="" disabled selected>Selecciona tu rol</option>
               <option value="alumno">Alumno</option>
               <option value="docente">Docente</option>
               <option value="director">Director</option>
               <option value="admin">Administrador</option>
             </select>
-
           </div>
           <p class="requiredText">* Campos obligatorios</p>
           <!-- Botón de registro -->
-          <button type="submit" class="btn btn-register w-100">Registrarse</button>
+          <button type="submit" class="btn btn-register w-100">
+            Registrarse
+          </button>
         </form>
       </div>
     </div>
+    <div class="toast-notification" *ngIf="mostrarToast">
+  <div class="toast-content">
+    <span class="toast-message">🎉 Registro completado con éxito</span>
+  </div>
+</div>
+
   </div>
 
   <!-- Carrusel a la derecha -->
@@ -84,11 +179,15 @@
       <div class="carousel-body">
         <h2 class="carousel-title">¿Listo para descubrir tu vocación?</h2>
         <p class="carousel-description">
-          Únete a UniPath y empieza a explorar las mejores opciones académicas para ti. Tu futuro comienza aquí.
+          Únete a UniPath y empieza a explorar las mejores opciones académicas
+          para ti. Tu futuro comienza aquí.
         </p>
       </div>
       <div class="carousel-image">
-        <img src="https://i.postimg.cc/6qx6Mz7k/9649836-7408.png" alt="Imagen ilustrativa de registro" />
+        <img
+          src="https://i.postimg.cc/6qx6Mz7k/9649836-7408.png"
+          alt="Imagen ilustrativa de registro"
+        />
       </div>
     </div>
   </div>

@@ -8,23 +8,22 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-register',
   standalone: true,
-  imports: [
-    NgClass,
-    FormsModule,
-    CommonModule
-  ],
+  imports: [NgClass, FormsModule, CommonModule],
   templateUrl: './register.html',
-  styleUrl: './register.css'
+  styleUrl: './register.css',
 })
 export class RegisterComponent {
-  constructor(private http: HttpClient, private router: Router) { }
-  fullname: string = '';
+  constructor(private http: HttpClient, private router: Router) {}
+  name: string = '';
+  lastName: string = '';
   email: string = '';
   password: string = '';
   confirmPassword: string = '';
   birthdate: string = '';
   school: string = '';
   selectedRole: string = '';
+
+  mostrarToast: boolean = false;
 
   isLengthValid: boolean = false;
   hasUppercase: boolean = false;
@@ -37,20 +36,17 @@ export class RegisterComponent {
   }
   getRolBackend(role: string): string {
     switch (role) {
-      case 'alumno': return 'ROLE_ALUMNO';
-      case 'docente': return 'ROLE_DOCENTE';
-      case 'director': return 'ROLE_DIRECTOR';
-      case 'admin': return 'ROLE_ADMIN';
-      default: return '';
+      case 'alumno':
+        return 'ROLE_ALUMNO';
+      case 'docente':
+        return 'ROLE_DOCENTE';
+      case 'director':
+        return 'ROLE_DIRECTOR';
+      case 'admin':
+        return 'ROLE_ADMIN';
+      default:
+        return '';
     }
-  }
-  getNombre(): string {
-    return this.fullname.trim().split(' ')[0] || '';
-  }
-
-  getApellido(): string {
-    const partes = this.fullname.trim().split(' ');
-    return partes.length > 1 ? partes.slice(1).join(' ') : '';
   }
 
   formatDate(fecha: string): string {
@@ -73,26 +69,32 @@ export class RegisterComponent {
     }
 
     const payload = {
-      name: this.getNombre(),
-      lastName: this.getApellido(),
+      name: this.name,
+      lastName: this.lastName,
+
       birthdate: this.formatDate(this.birthdate),
       email: this.email,
       password: this.password,
       role: this.getRolBackend(this.selectedRole),
-      school: this.school
+      school: this.school,
     };
 
+    this.http
+      .post('http://localhost:8080/api/v1/authentication/sign-up', payload)
+      .subscribe({
+        next: (res) => {
+          this.mostrarToast = true;
 
-    this.http.post('http://localhost:8080/api/v1/authentication/sign-up', payload).subscribe({
-      next: (res) => {
-        alert('🎉 Registro completado con éxito');
-        this.router.navigate(['/login']);
-      },
-      error: (err) => {
-        console.error('Error en el registro:', err);
-        alert('Hubo un error al registrarse. Intenta nuevamente.');
-      }
-    });
+          setTimeout(() => {
+            this.mostrarToast = false;
+            this.router.navigate(['/login']);
+          }, 3000); // Mostrar el toast 3s y redirigir
+        },
+
+        error: (err) => {
+          console.error('Error en el registro:', err);
+          alert('Hubo un error al registrarse. Intenta nuevamente.');
+        },
+      });
   }
-
 }
