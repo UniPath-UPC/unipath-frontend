@@ -103,7 +103,10 @@
 
 .detalle-carrera {
   flex: 1;
-  background-color: white;
+color: #02416d; /* Azul oscuro para buena legibilidad */
+  background: linear-gradient(-45deg, #e0f7fa, #b2ebf2, #80deea, #4dd0e1);
+  background-size: 400% 400%;
+animation: gradienteAnimado 10s ease infinite;
   border-radius: 16px;
   padding: 2rem;
   box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
@@ -115,7 +118,13 @@
   transition: opacity 0.4s ease, transform 0.4s ease;
   opacity: 0;
   transform: translateY(10px);
-  animation: fadeInUp 0.5s forwards;
+  animation: fadeInUp 0.5s forwards, gradienteAnimado 15s ease infinite;
+}
+
+.detalle-carrera h3{
+  font-size: 2rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
 }
 @keyframes fadeInUp {
   to {
@@ -123,6 +132,18 @@
     transform: translateY(0);
   }
 }
+@keyframes gradienteAnimado {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
 
 .detalle-carrera h3 {
   color: var(--primary-color);

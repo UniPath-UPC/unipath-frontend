@@ -51,7 +51,13 @@ export class CarreraComponent implements OnInit {
   });
 }
 
-
+irUniversidades() {
+   const nombreFormateado = this.carrera?.name
+      .toLowerCase()
+      .replace(/\s+/g, '-');
+    console.log('NOMBRE FORMATEADO:', nombreFormateado);
+  this.router.navigate(['/universidades', nombreFormateado]);
+  }
   volver() {
     history.back();
   }

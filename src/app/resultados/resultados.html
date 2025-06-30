@@ -56,13 +56,15 @@
         </div>
 
         <div class="detalle-carrera" *ngIf="opcionSeleccionada !== null">
-          <h3>{{ detalleCarrera.titulo }}</h3>
+          
+            <h3>{{ detalleCarrera.titulo }}</h3>
           <div class="botones-detalle">
             <button class="btn-accion" (click)="irACarrera()">
               Ver carrera
             </button>
             <button class="btn-accion btn-secundario" (click)="irAUniversidades()">Ver universidades</button>
           </div>
+        
         </div>
       </div>
     </section>

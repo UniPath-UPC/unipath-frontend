@@ -16,7 +16,7 @@
 .test-title {
   text-align: center;
   color: var(--primary-color);
-  margin-bottom: 1rem;
+  margin-bottom: 0.5rem;
   font-weight: 700;
 }
 .progress-bar-container {
@@ -24,7 +24,7 @@
   height: 10px;
   background-color: #ddd;
   border-radius: 5px;
-  margin-bottom: 2rem;
+  margin-bottom: 1.5rem;
   overflow: hidden;
 }
 
@@ -49,12 +49,37 @@
 .question-list li {
   margin-bottom: 1.5rem;
 }
-
+/*
 .options label {
   margin-right: 2rem;
   font-weight: 500;
   color: #333;
 }
+*/
+.options {
+  display: flex;
+  gap: 2rem;
+  margin-top: 0.3rem;
+  align-items: center;
+}
+
+.options label {
+  font-weight: 500;
+  color: var(--primary-color);
+  font-size: 1rem;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.options input[type="radio"] {
+  width: 20px;
+  height: 20px;
+  margin-right: 0.5rem;
+  accent-color: var(--primary-color); 
+  cursor: pointer;
+}
+
 
 .pagination-buttons {
   display: flex;

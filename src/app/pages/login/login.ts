@@ -45,7 +45,7 @@ export class LoginComponent {
             this.mostrarToast = false;
             this.toastMessage = '';
             this.router.navigate(['/home']);
-          }, 3000);
+          }, 2000);
         },
         error: (err) => {
           console.error(err);

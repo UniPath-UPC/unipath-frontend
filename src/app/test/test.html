@@ -10,14 +10,14 @@
         <!-- Preguntas -->
         <ul class="question-list" *ngIf="currentPage < totalPages - 1">
             <li *ngFor="let question of pagedQuestions; let i = index">
-                <label>{{ (currentPage * pageSize) + i + 1 }}. {{ question }}</label>
+                <label class="questionCh">{{ (currentPage * pageSize) + i + 1 }}. {{ question }}</label>
                 <div class="options">
-                    <label>
+                    <label class="option-button">
                         <input type="radio" [name]="'q' + ((currentPage * pageSize) + i)" [value]="1"
                             [(ngModel)]="selectedAnswers[(currentPage * pageSize) + i]"
                             (change)="setAnswer((currentPage * pageSize) + i, 1)" /> Sí
                     </label>
-                    <label>
+                    <label class="option-button">
                         <input type="radio" [name]="'q' + ((currentPage * pageSize) + i)" [value]="0"
                             [(ngModel)]="selectedAnswers[(currentPage * pageSize) + i]"
                             (change)="setAnswer((currentPage * pageSize) + i, 0)" /> No
