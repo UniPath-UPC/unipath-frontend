@@ -53,6 +53,11 @@ export const routes: Routes = [
       ),
   },
   {
+    path: 'info-usuario',
+    loadComponent: () =>
+      import('./info-user/info-user').then((c) => c.InfoUserComponent),
+  },
+  {
     path: '**',
     loadComponent: () =>
       import('./pages/login/login').then((c) => c.LoginComponent),

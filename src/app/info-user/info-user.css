@@ -1,0 +1,40 @@
+.info-background{
+     display: block;
+  background-color: var(--background-color);
+  min-height: 100vh;
+  padding: 2rem 1rem;
+}
+
+
+.info-usuario-container {
+  max-width: 600px;
+  margin: 2rem auto;
+  padding: 2rem;
+  background-color: #ffffffcc;
+  border-radius: 12px;
+  box-shadow: 0 0 12px rgba(0, 0, 0, 0.08);
+}
+
+.titulo-seccion {
+  text-align: center;
+  color: var(--primary-color);
+  margin-bottom: 1.5rem;
+}
+
+.form-info .form-group {
+  margin-bottom: 1rem;
+}
+
+.form-info label {
+  font-weight: 600;
+  margin-bottom: 0.4rem;
+  display: block;
+}
+
+.form-info input {
+  width: 100%;
+  padding: 0.5rem;
+  border: 1px solid #cccccc;
+  border-radius: 6px;
+  background-color: #f8f9fa;
+}
