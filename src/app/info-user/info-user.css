@@ -38,3 +38,7 @@
   border-radius: 6px;
   background-color: #f8f9fa;
 }
+.btn-modify{
+  background-color: var(--primary-color);
+  color : #ffffff;
+}

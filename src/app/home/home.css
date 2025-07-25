@@ -145,9 +145,11 @@
 
 .banner-img {
   width: 100%;
-  max-width: 500px;
+  max-width: 600px;
   height: auto;
   object-fit: cover;
+  border-radius: 10px;
+  
 }
 
 
