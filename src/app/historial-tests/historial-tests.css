@@ -1,0 +1,48 @@
+.background{
+    display: block;
+    background-color: var(--background-color);
+    min-height: 100vh;
+    padding: 2rem 1rem;
+}
+.historial-container {
+  max-width: 900px;
+  margin: auto;
+  padding: 2rem;
+  background-color: var(--background-color);
+  border-radius: 8px;
+}
+
+.titulo {
+  text-align: center;
+  margin-bottom: 1.5rem;
+  color: var(--primary-color);
+}
+
+table {
+  width: 100%;
+  background: white;
+  border-radius: 8px;
+  overflow: hidden;
+}
+table svg {
+  cursor: default;
+}
+
+td, th {
+  vertical-align: middle !important;
+}
+
+.btn-outline-primary {
+  font-weight: 500;
+}
+.btn-verTest{
+    background-color: #ffffff;
+    color: var(--primary-color);
+    border: 1px solid var(--primary-color);
+    padding: 0.5rem 1rem;
+    border-radius: 6px;
+}
+.btn-verTest:hover {
+    background-color: var(--primary-color);
+    color: #ffffff;
+}
