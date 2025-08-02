@@ -21,7 +21,7 @@ export class App {
   constructor(private router: Router) {
     this.router.events.subscribe(event => {
       if (event instanceof NavigationEnd) {
-        const rutasOcultas = ['/login', '/register', '/test'];
+        const rutasOcultas = ['/login', '/register', '/test', '/change-password'];
         this.mostrarNavbar = !rutasOcultas.includes(event.urlAfterRedirects);
       }
     });
