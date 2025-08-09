@@ -1,7 +1,7 @@
 <div class="background">
   <div class="historial-container">
     <h2 class="titulo">Historial de Tests</h2>
-    <div class="filtros-fecha d-flex align-items-center gap-2 mb-3">
+    <div class="filtros-fecha d-flex align-items-center gap-2 mb-4">
       <label for="desde">Desde:</label>
       <input
         type="date"
@@ -71,4 +71,4 @@
     </div>
   </div>
 </div>
-<div *ngIf="mostrarToast" class="toast-mensaje">{{ mensaje }}</div>
+<div *ngIf="mostrarToast" class="toast-mensaje" [ngStyle]="{ 'background-color': colorToast }">{{ mensaje }}</div>

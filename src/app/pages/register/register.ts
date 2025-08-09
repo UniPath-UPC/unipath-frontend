@@ -21,13 +21,30 @@ export class RegisterComponent {
   confirmPassword: string = '';
   birthdate: string = '';
   school: string = '';
+  selectedSchoolId: number | null = null;
   selectedRole: string = '';
+  schools: any[] = [];
 
   mostrarToast: boolean = false;
 
   isLengthValid: boolean = false;
   hasUppercase: boolean = false;
   passwordTouched: boolean = false;
+
+    ngOnInit() {
+    this.cargarColegios();
+  }
+
+  cargarColegios() {
+    this.http.get<any[]>('http://localhost:8080/api/v1/school').subscribe({
+      next: (data) => {
+        this.schools = data;
+      },
+      error: (err) => {
+        console.error('Error al cargar colegios:', err);
+      },
+    });
+  }
 
   validatePassword() {
     this.passwordTouched = this.password.length > 0;
@@ -67,6 +84,10 @@ export class RegisterComponent {
       alert('Las contraseñas no coinciden.');
       return;
     }
+    if (!this.selectedSchoolId) {
+      alert('Por favor selecciona un colegio.');
+      return;
+    }
 
     const payload = {
       name: this.name,
@@ -76,9 +97,9 @@ export class RegisterComponent {
       email: this.email,
       password: this.password,
       role: this.getRolBackend(this.selectedRole),
-      school: this.school,
+      school_id: this.selectedSchoolId,
     };
-
+    console.log('🔼 JSON que se envía al backend:', payload);
     this.http
       .post('http://localhost:8080/api/v1/authentication/sign-up', payload)
       .subscribe({
@@ -88,7 +109,7 @@ export class RegisterComponent {
           setTimeout(() => {
             this.mostrarToast = false;
             this.router.navigate(['/login']);
-          }, 3000); // Mostrar el toast 3s y redirigir
+          }, 2000); // Mostrar el toast 3s y redirigir
         },
 
         error: (err) => {

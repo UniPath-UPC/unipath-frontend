@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { NgStyle } from '@angular/common';
 
 @Component({
   selector: 'app-login',
@@ -15,7 +16,8 @@ export class LoginComponent {
   email: string = '';
   password: string = '';
   mostrarToast: boolean = false;
-  toastMessage: string = '✅ Inicio de sesión exitoso';
+  toastMessage: string = 'Inicio de sesión exitoso';
+  colorToast: string = 'var(--green-true-color)';
   constructor(private http: HttpClient, private router: Router) {}
 
   onLogin() {
@@ -36,11 +38,11 @@ export class LoginComponent {
           const token = res.accessToken;
           const userId = res.userId;
           localStorage.setItem('accessToken', token);
-  localStorage.setItem('userId', userId.toString());
-          
-          this.toastMessage = '✅ Inicio de sesión exitoso';
+          localStorage.setItem('userId', userId.toString());
+          this.colorToast = 'var(--green-true-color)';
+          this.toastMessage = 'Inicio de sesión exitoso';
           this.mostrarToast = true;
-          
+
           setTimeout(() => {
             this.mostrarToast = false;
             this.toastMessage = '';
@@ -49,9 +51,10 @@ export class LoginComponent {
         },
         error: (err) => {
           console.error(err);
-          this.toastMessage = '❌ Error al iniciar sesión, intenta nuevamente';
+          this.colorToast = 'var(--red-false-color)';
+          this.toastMessage = 'Error al iniciar sesión, intenta nuevamente';
           this.mostrarToast = true;
-          
+
           setTimeout(() => {
             this.mostrarToast = false;
             this.toastMessage = '';

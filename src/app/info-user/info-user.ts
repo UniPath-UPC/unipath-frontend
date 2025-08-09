@@ -38,7 +38,7 @@ export class InfoUserComponent implements OnInit {
           this.apellido = user.lastName;
           this.email = user.email;
           this.fechaNacimiento = user.birthdate;
-          this.colegio = user.school;
+          this.colegio = user.school.name;
           this.rol = this.formatearRol(user.role.name);
           this.passwordUsuario = user.password;
 
@@ -72,7 +72,7 @@ export class InfoUserComponent implements OnInit {
     this.nombre = this.datosOriginales.name;
     this.apellido = this.datosOriginales.lastName;
     this.fechaNacimiento = this.datosOriginales.birthdate;
-    this.colegio = this.datosOriginales.school;
+    this.colegio = this.datosOriginales.school.name;
     this.modoEdicion = false;
   }
 
@@ -89,8 +89,7 @@ export class InfoUserComponent implements OnInit {
       lastName: this.apellido,
       birthdate: this.fechaNacimiento,
       email: this.email,
-      //password: this.passwordUsuario,
-      school: this.colegio,
+      school:""
     };
     console.log('🔼 JSON que se envía al backend:', payload);
 
@@ -104,7 +103,7 @@ export class InfoUserComponent implements OnInit {
           this.apellido = user.lastName;
           this.email = user.email;
           this.fechaNacimiento = user.birthdate;
-          this.colegio = user.school;
+          this.colegio = user.school.name;
           this.rol = this.formatearRol(user.role.name);
           this.passwordUsuario = user.password;
 

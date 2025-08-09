@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { CommonModule, NgClass, NgForOf } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { NgStyle } from '@angular/common';
 
 @Component({
   selector: 'app-historial-tests',
@@ -18,6 +19,7 @@ export class HistorialTestsComponent implements OnInit {
   fechaDesde: string = '';
   fechaHasta: string = '';
   testsFiltrados: any[] = [];
+  colorToast: string = 'var(--green-true-color)';
 
   constructor(private http: HttpClient, private router: Router) {}
 
@@ -135,9 +137,10 @@ obtenerNumeroMes(mesTexto: string): string {
       .subscribe({
         next: () => {
           test.favorite = esFavorito ? 0 : 1;
+          this.colorToast = esFavorito ? 'var(--red-false-color)' : 'var(--green-true-color)'; 
           this.mensaje = esFavorito
-            ? 'Test eliminado de favoritos'
-            : 'Test marcado como favorito';
+            ? '☆ Test eliminado de favoritos'
+            : '★ Test marcado como favorito';
           this.mostrarToast = true;
 
           setTimeout(() => {
