@@ -3,42 +3,27 @@
     <h1 class="resultados-title">Informe de resultados</h1>
 
     <section class="datos-encuestado">
-      <section class="datos-encuestado">
-        <h2><strong>Datos del encuestado</strong></h2>
-        <p><strong>Nombre:</strong> {{ nombreUsuario }}</p>
-        <p><strong>Edad:</strong> {{ edad }} años</p>
-        <p><strong>Fecha de la encuesta:</strong> {{ fecha }}</p>
-      </section>
+      <h2><strong>Datos del encuestado</strong></h2>
+      <p><strong>Nombre:</strong> {{ nombreUsuario }}</p>
+      <p><strong>Edad:</strong> {{ edad }} años</p>
+      <p><strong>Fecha de la encuesta:</strong> {{ fecha }}</p>
     </section>
-    <section class="resumen-section">
-      <h2
-        class="d-flex flex-direction-row align-items-center justify-content-between"
-      >
-        <strong>
-          Resumen
 
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="20"
-            height="20"
-            fill="currentColor"
-            class="bi bi-question-circle"
-            viewBox="0 0 16 16"
-          >
-            <path
-              d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"
-            />
-            <path
-              d="M5.255 5.786a.237.237 0 0 0 .241.247h.825c.138 0 .248-.113.266-.25.09-.656.54-1.134 1.342-1.134.686 0 1.314.343 1.314 1.168 0 .635-.374.927-.965 1.371-.673.489-1.206 1.06-1.168 1.987l.003.217a.25.25 0 0 0 .25.246h.811a.25.25 0 0 0 .25-.25v-.105c0-.718.273-.927 1.01-1.486.609-.463 1.244-.977 1.244-2.056 0-1.511-1.276-2.241-2.673-2.241-1.267 0-2.655.59-2.75 2.286m1.557 5.763c0 .533.425.927 1.01.927.609 0 1.028-.394 1.028-.927 0-.552-.42-.94-1.029-.94-.584 0-1.009.388-1.009.94"
-            />
-          </svg>
-        </strong>
+    <section class="resumen-section">
+      <h2 class="d-flex flex-direction-row align-items-center justify-content-between">
+        <strong>Resumen</strong>
+        <button
+          type="button"
+          class="btn-help ms-2"
+          aria-label="¿Cómo funciona?"
+          (click)="abrirModalModelo()"
+          title="¿Cómo funciona el modelo?"
+        >
+          <i class="bi bi-patch-question-fill me-2"></i> ¿Cómo funciona?
+        </button>
       </h2>
 
-      <div
-        class="carreras-wrapper"
-        [class.expandido]="opcionSeleccionada !== null"
-      >
+      <div class="carreras-wrapper" [class.expandido]="opcionSeleccionada !== null">
         <div class="carreras-recomendadas">
           <div
             class="opcion-carrera"
@@ -50,23 +35,91 @@
               <p class="opcion-titulo">
                 <strong>Opción {{ i + 1 }}:</strong> {{ carrera.nameCareer }}
               </p>
-              <p class="opcion-porcentaje">{{ carrera.hitRate }}%</p>
+              <p class="opcion-porcentaje">{{ carrera.hitRate | number:'1.0-2' }}%</p>
             </div>
           </div>
         </div>
 
         <div class="detalle-carrera" *ngIf="opcionSeleccionada !== null">
-          
-            <h3>{{ detalleCarrera.titulo }}</h3>
+          <h3>{{ detalleCarrera.titulo }}</h3>
           <div class="botones-detalle">
-            <button class="btn-accion" (click)="irACarrera()">
-              Ver carrera
-            </button>
+            <button class="btn-accion" (click)="irACarrera()">Ver carrera</button>
             <button class="btn-accion btn-secundario" (click)="irAUniversidades()">Ver universidades</button>
           </div>
-        
         </div>
       </div>
     </section>
+  </div>
+</div>
+
+<!-- Modal explicación del modelo -->
+<div class="modal-backdrop-custom" *ngIf="mostrarModalModelo" (click)="cerrarModalModelo()">
+  <div
+    class="modal-card-custom"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="modalModeloTitulo"
+    (click)="$event.stopPropagation()"
+    tabindex="-1"
+    (keyup.escape)="cerrarModalModelo()"
+  >
+    <div class="modal-header-custom">
+      <h3 id="modalModeloTitulo" class="m-0">¿Cómo funciona el modelo?</h3>
+      <button
+        type="button"
+        class="btn btn-link p-0"
+        aria-label="Cerrar"
+        (click)="cerrarModalModelo()"
+        title="Cerrar"
+      >
+        <i class="bi bi-x-lg"></i>
+      </button>
+    </div>
+
+    <div class="modal-body-custom">
+      <ol class="mb-3">
+        <li class="mb-2">
+          <strong>Encuesta y perfil:</strong> tus respuestas sobre intereses, habilidades y datos
+          generales forman tu perfil vocacional.
+        </li>
+        <li class="mb-2">
+          <strong>Modelo de IA (Random Forest):</strong> el sistema compara tu perfil con patrones
+          aprendidos y calcula un <em>puntaje de coincidencia</em> (<code>hitRate</code>) para cada carrera.
+        </li>
+        <li class="mb-2">
+          <strong>Top 3 y ajuste de porcentajes:</strong> seleccionamos las <u>3 mejores carreras</u>
+          por <code>hitRate</code>. Luego <u>reajustamos los porcentajes</u> tomando solo esas tres
+          para que sumen 100%.
+        </li>
+      </ol>
+
+      <!-- ⬇️ Ejemplo dinámico con las carreras reales (Top 3) -->
+      <div class="alert alert-info">
+        <div class="fw-semibold mb-2">Ejemplo con tus 3 opciones</div>
+
+        <div class="d-flex justify-content-between" *ngFor="let r of recomendacionesAjustadas; let idx = index">
+          <span>{{ idx + 1 }}. {{ r.nameCareer }}</span>
+          <span>
+            Original: <strong>{{ fmt2(r.original) }}%</strong>
+            &nbsp;|&nbsp;
+            Ajustado: <strong>{{ fmt2(r.ajustado) }}%</strong>
+          </span>
+        </div>
+
+        <hr class="my-2" />
+        <small class="text-muted d-block">
+          *Estos porcentajes ajustados solo sirven para comparar mejor tus 3 opciones principales.
+        </small>
+      </div>
+
+      <p class="mb-0">
+        <strong>Nota:</strong> el ajuste no cambia el orden del Top 3; solo reescala los porcentajes para
+        facilitar la comparación entre las tres opciones principales.
+      </p>
+    </div>
+
+    <div class="modal-footer-custom">
+      <button class="btn btn-primary" (click)="cerrarModalModelo()">Entendido</button>
+    </div>
   </div>
 </div>

@@ -1,0 +1,212 @@
+.background{
+  background-color: var(--background-color);
+}
+.reporte-container {
+  min-height: 100vh;
+  width: 100%;
+  background-color: var(--background-color);
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.titulo {
+  font-weight: bold;
+  color: var(--dark-blue);
+  margin-bottom: 1rem; /* un poco menos para acercar el switcher */
+  text-align: center;
+}
+
+/* Switcher de vista */
+.view-switch .btn-switch {
+  border: 2px solid var(--primary-color);
+  color: var(--primary-color);
+  background-color: transparent;
+  font-weight: 600;
+}
+.view-switch .btn-switch.active,
+.view-switch .btn-switch:hover {
+  background-color: var(--primary-color);
+  color: #fff;
+}
+
+/* Filtros y tabla (vista lista) */
+.filtro-fechas {
+  justify-content: center;
+}
+
+.filtro-input {
+  flex: 1;
+  min-width: 200px;
+}
+
+.btn-filtrar {
+  background-color: var(--primary-color);
+  border: none;
+  color: white;
+  font-weight: bold;
+  padding: 0.6rem 1.5rem;
+  border-radius: 8px;
+  transition: background-color 0.3s ease;
+}
+
+.btn-filtrar:hover {
+  background-color: #02416d;
+}
+
+.tabla-container {
+  flex: 1;
+  overflow-x: auto;
+}
+
+.btn-ver {
+  border: 2px solid var(--primary-color);
+  color: var(--primary-color);
+  background-color: transparent;
+  padding: 0.4rem 1rem;
+  border-radius: 6px;
+  transition: all 0.3s ease;
+}
+
+.btn-ver:hover {
+  background-color: var(--primary-color);
+  color: white;
+}
+
+.graficos-container {
+  width: 100%;
+}
+
+.charts-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+}
+
+.charts-grid .kpi {
+  grid-column: 1 / -1;
+}
+
+@media (min-width: 992px) {
+  .charts-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+/* ⬇️ Forzar UNA sola columna cuando el contenedor tenga también la clase `one-col`
+   (usado en la vista "impacto") */
+.charts-grid.one-col {
+  grid-template-columns: 1fr !important;
+}
+@media (min-width: 992px) {
+  .charts-grid.one-col {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+.apexcharts-canvas,
+.apexcharts-svg {
+  width: 100% !important;
+}
+
+/* ===========================
+   MODAL (reutilizable)
+   =========================== */
+.modal-backdrop-custom {
+  position: fixed;
+  inset: 0;
+  background: rgba(10, 20, 30, 0.45);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1050;
+  animation: backdropIn .22s ease-out both;
+}
+.modal-backdrop-custom.is-closing {
+  animation: backdropOut .2s ease-in both;
+}
+
+.modal-card-custom {
+  width: min(640px, 92vw);
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 20px 60px rgba(0,0,0,.25);
+  display: flex;
+  flex-direction: column;
+  max-height: 85vh;
+  outline: none;
+  animation: modalIn .24s cubic-bezier(.22,.8,.32,1) both;
+}
+.modal-card-custom.is-closing {
+  animation: modalOut .18s cubic-bezier(.4,0,.6,1) both;
+}
+
+/* Header en fila, con botón a la derecha */
+.modal-header-custom {
+  padding: 0.9rem 1.1rem;
+  border-bottom: 1px solid #e9ecef;
+  display: flex;                 /* <-- clave */
+  align-items: center;           /* <-- alinea verticalmente */
+  justify-content: space-between;/* <-- título izq, botón der */
+  gap: .75rem;
+}
+.modal-header-custom h3 {
+  margin: 0;
+  line-height: 1.2;
+  font-weight: 600;
+}
+.modal-header-custom .btn {
+  color: #6c757d;
+  white-space: nowrap;           /* evita que baje de línea */
+}
+.modal-header-custom .btn:hover {
+  color: #212529;
+}
+
+.modal-body-custom {
+  padding: 1rem 1.1rem;
+  overflow: auto;
+}
+
+.modal-footer-custom {
+  padding: 0.9rem 1.1rem;
+  border-top: 1px solid #e9ecef;
+  display: flex;
+  justify-content: flex-end;
+}
+
+/* Botón “Entendido” con color institucional + animación */
+.modal-footer-custom .btn-primary {
+  background-color: var(--primary-color);
+  border: none;
+  transition: transform .12s ease, box-shadow .12s ease, background-color .12s ease;
+}
+.modal-footer-custom .btn-primary:hover {
+  background-color: #02416d;
+  box-shadow: 0 6px 16px rgba(0,0,0,.12);
+  transform: translateY(-1px);
+}
+.modal-footer-custom .btn-primary:active {
+  transform: translateY(0);
+  box-shadow: none;
+}
+
+/* Animaciones */
+@keyframes backdropIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+@keyframes backdropOut {
+  from { opacity: 1; }
+  to   { opacity: 0; }
+}
+@keyframes modalIn {
+  from { opacity: 0; transform: translateY(10px) scale(.98); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+@keyframes modalOut {
+  from { opacity: 1; transform: translateY(0) scale(1); }
+  to   { opacity: 0; transform: translateY(8px) scale(.98); }
+}

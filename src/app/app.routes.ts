@@ -68,6 +68,11 @@ export const routes: Routes = [
       import('./change-password/change-password').then((c) => c.ChangePasswordComponent),
   },
   {
+  path: 'reporte-tests',
+  loadComponent: () =>
+    import('./reporte-tests/reporte-tests').then((c) => c.ReporteTestsComponent),
+},
+  {
     path: '**',
     loadComponent: () =>
       import('./pages/login/login').then((c) => c.LoginComponent),

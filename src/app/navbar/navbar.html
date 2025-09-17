@@ -17,7 +17,7 @@
     <ul class="nav-links">
       <li><a href="">¿Quienes Somos?</a></li>
       <li><a href="/home#como-funciona">¿Cómo funciona?</a></li>
-      <li><a href="/inicio-form" class="survey-link">Iniciar Encuesta</a></li>
+      <li *ngIf="rolUsuario === 'Alumno'"><a href="/inicio-form" class="survey-link">Iniciar Encuesta</a></li>
     </ul>
     <div
       class="profile-icon"
@@ -82,10 +82,21 @@
       </div>
 
       <div class="d-flex flex-column text-center w-100 gap-3">
-        <a href="/info-usuario" class="offcanvas-link">Ver perfil</a>
-        <a href="/historial-tests" class="offcanvas-link">Historial de test</a>
-        <a href="#" class="offcanvas-link">Contacto</a>
-      </div>
+  <a href="/info-usuario" class="offcanvas-link">Ver perfil</a>
+
+  <!-- Solo visible para alumnos -->
+  <a *ngIf="rolUsuario === 'Alumno'" href="/historial-tests" class="offcanvas-link">
+    Historial de tests
+  </a>
+
+  <!-- Solo visible para docentes o directores -->
+  <a *ngIf="rolUsuario === 'Docente' || rolUsuario === 'Director'" href="/reporte-tests" class="offcanvas-link">
+    Reporte de tests
+  </a>
+
+  <a href="#" class="offcanvas-link">Contacto</a>
+</div>
+
       <div
         class="logout-btn-container mt-auto pt-4 w-100 d-flex justify-content-center"
       >

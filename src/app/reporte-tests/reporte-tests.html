@@ -1,0 +1,298 @@
+<div class="background">
+  <div class="reporte-container">
+    <h2 class="titulo">Reporte de Tests de alumnos</h2>
+
+    <!-- Switcher de vista (derecha, entre título y filtros) -->
+    <div class="view-switch d-flex justify-content-end mb-3">
+      <div class="btn-group" role="group" aria-label="Cambiar vista">
+        <button type="button" class="btn btn-switch" [class.active]="vista === 'lista'" (click)="cambiarVista('lista')">
+          <i class="bi bi-list-task me-2"></i> Lista
+        </button>
+        <button type="button" class="btn btn-switch" [class.active]="vista === 'graficos'" (click)="cambiarVista('graficos')">
+          <i class="bi bi-bar-chart-fill me-2"></i> Gráficos
+        </button>
+        <button  type="button" class="btn btn-switch" [class.active]="vista === 'impacto'" (click)="cambiarVista('impacto')">
+          <i class="bi bi-file-earmark-post me-2"></i> Reporte de impacto
+        </button>
+      </div>
+    </div>
+
+    <ng-container *ngIf="vista === 'lista'">
+      <div class="filtro-fechas mb-4 d-flex align-items-end gap-3">
+        <div class="filtro-input">
+          <label for="fechaDesde" class="form-label">Desde</label>
+          <input type="date" id="fechaDesde" class="form-control" [(ngModel)]="fechaDesde" />
+        </div>
+        <div class="filtro-input">
+          <label for="fechaHasta" class="form-label">Hasta</label>
+          <input type="date" id="fechaHasta" class="form-control" [(ngModel)]="fechaHasta" />
+        </div>
+        <button class="btn btn-filtrar" (click)="filtrarPorFecha()">Filtrar</button>
+        <button class="btn btn-secondary" (click)="resetearFiltro()">Limpiar</button>
+      </div>
+
+      <div class="tabla-container">
+        <table class="table table-bordered table-hover">
+          <thead class="table-primary">
+            <tr>
+              <th>Fecha de registro</th>
+              <th>Alumno</th>
+              <th>Edad</th>
+              <th>Principal predicción</th>
+              <th>Área de interés principal</th>
+              <th>Acciones</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let test of testsFiltrados">
+              <td>{{ formatearFecha(test.fechaRegistro) }}</td>
+              <td>{{ test.username }}</td>
+              <td>{{ test.age }}</td>
+              <td>{{ test.prediction[0]?.nameCareer }} - {{ test.prediction[0]?.hitRate }}%</td>
+              <!-- ⬇️ usa nombre completo de área (soporta areaInteres o area1) -->
+              <td>{{ nombreArea(test.areaInteres ?? test.area1) }}</td>
+              <td>
+                <button class="btn btn-ver" (click)="verResultado(test)">
+                  Ver resultado
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div *ngIf="testsFiltrados.length === 0" class="text-center mt-4">
+        <p>No hay tests en el rango de fechas seleccionado.</p>
+      </div>
+    </ng-container>
+
+    <!-- VISTA: GRAFICOS -->
+    <ng-container *ngIf="vista === 'graficos'">
+      <div class="graficos-container">
+        <div class="charts-grid">
+
+          <!-- KPI (ocupa todo el ancho) -->
+          <div class="chart-item kpi">
+            <div class="card shadow-sm">
+              <div class="card-body d-flex align-items-center justify-content-between">
+                <div>
+                  <h6 class="mb-1 text-muted">Tests con HitRate &gt; 50%</h6>
+                  <h3 class="m-0 fw-bold">{{ kpiHitRateAlto }}</h3>
+                </div>
+                <i class="bi bi-graph-up-arrow fs-1"></i>
+              </div>
+            </div>
+          </div>
+
+          <!-- 1) Carreras más recomendadas -->
+          <div class="chart-item">
+            <div class="card shadow-sm h-100">
+              <div class="card-body">
+                <div class="d-flex align-items-center justify-content-between mb-3">
+                  <h5 class="card-title m-0">Carreras más recomendadas</h5>
+                  <button class="btn btn-link p-0" title="¿Qué es esto?"
+                          (click)="abrirAyuda('carreras')">
+                    <i class="bi bi-patch-question-fill fs-5"></i>
+                  </button>
+                </div>
+                <apx-chart
+                  *ngIf="chartCarreras"
+                  [series]="chartCarreras.series"
+                  [chart]="chartCarreras.chart"
+                  [xaxis]="chartCarreras.xaxis"
+                  [dataLabels]="chartCarreras.dataLabels"
+                  [tooltip]="chartCarreras.tooltip"
+                  [yaxis]="chartCarreras.yaxis">
+                </apx-chart>
+                <div *ngIf="!chartCarreras" class="text-muted">Sin datos para mostrar.</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 2) Áreas principales -->
+          <div class="chart-item">
+            <div class="card shadow-sm h-100">
+              <div class="card-body">
+                <div class="d-flex align-items-center justify-content-between mb-3">
+                  <h5 class="card-title m-0">Áreas de interés principales</h5>
+                  <button class="btn btn-link p-0" title="¿Qué es esto?"
+                          (click)="abrirAyuda('areas')">
+                    <i class="bi bi-patch-question-fill fs-5"></i>
+                  </button>
+                </div>
+                <apx-chart
+                  *ngIf="chartAreas"
+                  [series]="chartAreas.series"
+                  [chart]="chartAreas.chart"
+                  [labels]="chartAreas.labels"
+                  [legend]="chartAreas.legend"
+                  [dataLabels]="chartAreas.dataLabels"
+                  [tooltip]="chartAreas.tooltip">
+                </apx-chart>
+                <div *ngIf="!chartAreas" class="text-muted">Sin datos para mostrar.</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 3) HitRate promedio por carrera -->
+          <div class="chart-item">
+            <div class="card shadow-sm h-100">
+              <div class="card-body">
+                <div class="d-flex align-items-center justify-content-between mb-3">
+                  <h5 class="card-title m-0">HitRate promedio por carrera recomendada</h5>
+                  <button class="btn btn-link p-0" title="¿Qué es esto?"
+                          (click)="abrirAyuda('avgHit')">
+                    <i class="bi bi-patch-question-fill fs-5"></i>
+                  </button>
+                </div>
+                <apx-chart
+                  *ngIf="chartAvgHitRate"
+                  [series]="chartAvgHitRate.series"
+                  [chart]="chartAvgHitRate.chart"
+                  [xaxis]="chartAvgHitRate.xaxis"
+                  [dataLabels]="chartAvgHitRate.dataLabels"
+                  [tooltip]="chartAvgHitRate.tooltip"
+                  [yaxis]="chartAvgHitRate.yaxis">
+                </apx-chart>
+                <div *ngIf="!chartAvgHitRate" class="text-muted">Sin datos para mostrar.</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 4) Evolución temporal -->
+          <div class="chart-item">
+            <div class="card shadow-sm h-100">
+              <div class="card-body">
+                <div class="d-flex align-items-center justify-content-between mb-3">
+                  <h5 class="card-title m-0">Evolución temporal de recomendaciones</h5>
+                  <button class="btn btn-link p-0" title="¿Qué es esto?"
+                          (click)="abrirAyuda('evolucion')">
+                    <i class="bi bi-patch-question-fill fs-5"></i>
+                  </button>
+                </div>
+                <apx-chart
+                  *ngIf="chartEvolucion"
+                  [series]="chartEvolucion.series"
+                  [chart]="chartEvolucion.chart"
+                  [xaxis]="chartEvolucion.xaxis"
+                  [stroke]="chartEvolucion.stroke"
+                  [dataLabels]="chartEvolucion.dataLabels"
+                  [tooltip]="chartEvolucion.tooltip"
+                  [yaxis]="chartEvolucion.yaxis">
+                </apx-chart>
+                <div *ngIf="!chartEvolucion" class="text-muted">Sin datos para mostrar.</div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </ng-container>
+
+    <!-- VISTA IMPACTO -->
+    <ng-container *ngIf="vista === 'impacto'">
+  <div class="graficos-container">
+    <!-- ⬇️ usamos el modificador one-col para forzar una sola columna -->
+    <div class="charts-grid one-col">
+
+      <!-- KPI total de estudiantes con predicción -->
+      <div class="chart-item kpi">
+        <div class="card shadow-sm">
+          <div class="card-body d-flex align-items-center justify-content-between">
+            <div>
+              <h6 class="mb-1 text-muted">Estudiantes con predicción</h6>
+              <h3 class="m-0 fw-bold">{{ totalEstudiantesPrediccion }}</h3>
+            </div>
+            <i class="bi bi-people fs-1"></i>
+          </div>
+        </div>
+      </div>
+
+      <!-- Barras: cantidad de recomendaciones por área de interés -->
+      <div class="chart-item">
+        <div class="card shadow-sm h-100">
+          <div class="card-body">
+            <div class="d-flex align-items-center justify-content-between mb-3">
+              <h5 class="card-title m-0">Recomendaciones por área de interés</h5>
+              <button class="btn btn-link p-0" title="¿Qué es esto?"
+                      (click)="abrirAyuda('areasImpacto')">
+                <i class="bi bi-patch-question-fill fs-5"></i>
+              </button>
+            </div>
+            <apx-chart
+              *ngIf="chartAreasImpacto"
+              [series]="chartAreasImpacto.series"
+              [chart]="chartAreasImpacto.chart"
+              [xaxis]="chartAreasImpacto.xaxis"
+              [dataLabels]="chartAreasImpacto.dataLabels"
+              [tooltip]="chartAreasImpacto.tooltip"
+              [yaxis]="chartAreasImpacto.yaxis">
+            </apx-chart>
+            <div *ngIf="!chartAreasImpacto" class="text-muted">Sin datos para mostrar.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ECDF: percentil vs hitRate -->
+      <div class="chart-item">
+        <div class="card shadow-sm h-100">
+          <div class="card-body">
+            <div class="d-flex align-items-center justify-content-between mb-3">
+              <h5 class="card-title m-0">Nivel de precisión por percentil de alumnos</h5>
+              <button class="btn btn-link p-0" title="¿Qué es esto?"
+                      (click)="abrirAyuda('percentiles')">
+                <i class="bi bi-patch-question-fill fs-5"></i>
+              </button>
+            </div>
+            <apx-chart
+              *ngIf="chartPercentiles"
+              [series]="chartPercentiles.series"
+              [chart]="chartPercentiles.chart"
+              [xaxis]="chartPercentiles.xaxis"
+              [stroke]="chartPercentiles.stroke"
+              [dataLabels]="chartPercentiles.dataLabels"
+              [tooltip]="chartPercentiles.tooltip"
+              [yaxis]="chartPercentiles.yaxis">
+            </apx-chart>
+            <div *ngIf="!chartPercentiles" class="text-muted">Sin datos para mostrar.</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</ng-container>
+
+    <!-- MODAL DE AYUDA (reutilizable) -->
+    <div class="modal-backdrop-custom"
+         *ngIf="mostrarAyuda"
+         [class.is-closing]="modalClosing"
+         (click)="cerrarAyuda()">
+
+      <div class="modal-card-custom"
+           [class.is-closing]="modalClosing"
+           role="dialog" aria-modal="true"
+           (click)="$event.stopPropagation()"
+           tabindex="-1"
+           (keyup.escape)="cerrarAyuda()">
+
+        <div class="modal-header-custom">
+          <h3 class="m-0">{{ ayudaContenido.titulo }}</h3>
+          <button type="button" class="btn btn-link p-0" aria-label="Cerrar" (click)="cerrarAyuda()">
+            <i class="bi bi-x-lg"></i>
+          </button>
+        </div>
+
+        <div class="modal-body-custom">
+          <p class="mb-0">{{ ayudaContenido.descripcion }}</p>
+        </div>
+
+        <div class="modal-footer-custom">
+          <button class="btn btn-primary" (click)="cerrarAyuda()">Entendido</button>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+</div>
