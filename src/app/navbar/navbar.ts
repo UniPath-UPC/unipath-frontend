@@ -24,7 +24,7 @@ export class NavbarComponent implements OnInit {
 
     if (this.estaLogueado && userId) {
       const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
-      this.http.get<any>(`http://localhost:8080/api/v1/user/${userId}`, { headers })
+      this.http.get<any>(`https://unipath-backend-1073d69ce58b.herokuapp.com/api/v1/user/${userId}`, { headers })
         .subscribe({
           next: (data) => {
             this.nombreUsuario = `${data.name} ${data.lastName}`;
