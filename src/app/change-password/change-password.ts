@@ -46,7 +46,7 @@ export class ChangePasswordComponent {
   enviarCorreo() {
     if (!this.correo) return;
 
-    const url = `http://localhost:8080/api/v1/request/code-validation?email=${encodeURIComponent(this.correo)}`;
+    const url = `https://unipath-backend-1073d69ce58b.herokuapp.com/api/v1/request/code-validation?email=${encodeURIComponent(this.correo)}`;
     this.mensaje = '';
     this.enviando = true;
 
@@ -127,7 +127,7 @@ export class ChangePasswordComponent {
       code: code,
     };
 
-    this.http.post<number>('http://localhost:8080/api/v1/request/match-code', payload).subscribe({
+    this.http.post<number>('https://unipath-backend-1073d69ce58b.herokuapp.com/api/v1/request/match-code', payload).subscribe({
       next: (res) => {
         if (res === 1) {
           this.mensaje = ''; // limpia el error si lo había
@@ -171,7 +171,7 @@ export class ChangePasswordComponent {
       return;
     }
 
-    this.http.put<any>('http://localhost:8080/api/v1/authentication/setPassword', {
+    this.http.put<any>('https://unipath-backend-1073d69ce58b.herokuapp.com/api/v1/authentication/setPassword', {
       userId: this.userId,
       newPassword: this.nuevaContrasena
     }).subscribe({
