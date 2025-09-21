@@ -38,7 +38,7 @@ export class CarreraComponent implements OnInit {
   const headers = { Authorization: `Bearer ${token}` };
 
   this.http.get<any>(
-    `http://localhost:8080/api/v1/career/${nombreParam}`,
+    `https://unipath-backend-1073d69ce58b.herokuapp.com/api/v1/career/${nombreParam}`,
     { headers }
   ).subscribe({
     next: (res) => {
