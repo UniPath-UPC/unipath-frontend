@@ -39,7 +39,7 @@ export class UniversidadesCarreraComponent implements OnInit {
 
     this.http
       .get<any[]>(
-        `http://localhost:8080/api/v1/universitycareer/${carreraParam}`,
+        `https://unipath-backend-1073d69ce58b.herokuapp.com/api/v1/universitycareer/${carreraParam}`,
         { headers }
       )
       .subscribe({
@@ -48,7 +48,7 @@ export class UniversidadesCarreraComponent implements OnInit {
       });
       
     this.http
-      .get<any>(`http://localhost:8080/api/v1/career/${carreraParam}`, {
+      .get<any>(`https://unipath-backend-1073d69ce58b.herokuapp.com/api/v1/career/${carreraParam}`, {
         headers,
       })
       .subscribe({
