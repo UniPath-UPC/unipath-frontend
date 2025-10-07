@@ -181,20 +181,19 @@ export class ReporteTestsComponent implements OnInit {
         error: (err) => console.error('Error al obtener reports_info:', err)
       });
       // 3) Datos del usuario en sesión
-    this.http.get<any[]>(`http://localhost:8080/api/v1/user/${userId}`, { headers })
+    this.http.get<any>(`http://localhost:8080/api/v1/user/${userId}`, { headers })
       .subscribe({
-        next: (data) => {
-          this.infouser = data || [];
-          this.isDirector = this.infouser.some(u => u.role.id == 3);
+        next: (user) => {
+          this.isDirector = user?.role?.id === 4;
         },
-        error: (err) => console.error('Error al obtener informacion del usuario:', err)
+        error: (err) => console.error('Error al obtener usuario:', err)
       });
   }
 
   cambiarVista(v: 'lista' | 'graficos' | 'impacto') {
+    if (v === 'impacto' && !this.isDirector) return; // bloquear acceso
     this.vista = v;
   }
-
   // -------------------------------
   // LÓGICA DE TABLA
   // -------------------------------

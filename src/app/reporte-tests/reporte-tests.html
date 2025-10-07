@@ -11,7 +11,7 @@
         <button type="button" class="btn btn-switch" [class.active]="vista === 'graficos'" (click)="cambiarVista('graficos')">
           <i class="bi bi-bar-chart-fill me-2"></i> Gráficos
         </button>
-        <button  type="button" class="btn btn-switch" [class.active]="vista === 'impacto'" (click)="cambiarVista('impacto')">
+        <button *ngIf="isDirector" type="button" class="btn btn-switch" [class.active]="vista === 'impacto'" (click)="cambiarVista('impacto')">
           <i class="bi bi-file-earmark-post me-2"></i> Reporte de impacto
         </button>
       </div>

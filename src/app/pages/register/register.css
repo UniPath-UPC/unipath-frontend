@@ -209,3 +209,12 @@ select.form-control {
 .animate-slide-in {
   animation: slideInLeft 0.8s ease-out both;
 }
+@media (max-width: 500px) {
+  .register-carousel{
+    display: none;
+  }
+  .form-section {
+  width: 100%;
+}
+
+}
