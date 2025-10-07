@@ -136,7 +136,7 @@ export class InfoUserComponent implements OnInit {
   });
 
   this.http
-    .delete(`http://localhost:8080/api/v1/user/${userId}`, { headers })
+    .delete(`https://unipath-backend-1073d69ce58b.herokuapp.com/api/v1/user/${userId}`, { headers })
     .subscribe({
       next: () => {
         console.log('Cuenta eliminada correctamente');

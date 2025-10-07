@@ -35,7 +35,7 @@ export class HistorialTestsComponent implements OnInit {
     const headers = new HttpHeaders({ Authorization: `Bearer ${token}` });
 
     this.http
-      .get<any[]>(`http://localhost:8080/api/v1/test/${userId}`, { headers })
+      .get<any[]>(`https://unipath-backend-1073d69ce58b.herokuapp.com/api/v1/test/${userId}`, { headers })
       .subscribe({
         next: (data) => {
           this.historialTests = data;
@@ -133,7 +133,7 @@ obtenerNumeroMes(mesTexto: string): string {
     const esFavorito = test.favorite === 1;
 
     this.http
-      .put(`http://localhost:8080/api/v1/test/${testId}`, null, { headers })
+      .put(`https://unipath-backend-1073d69ce58b.herokuapp.com/api/v1/test/${testId}`, null, { headers })
       .subscribe({
         next: () => {
           test.favorite = esFavorito ? 0 : 1;

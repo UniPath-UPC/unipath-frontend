@@ -32,7 +32,7 @@ export class LoginComponent {
     };
 
     this.http
-      .post<any>('http://localhost:8080/api/v1/authentication/sign-in', payload)
+      .post<any>('https://unipath-backend-1073d69ce58b.herokuapp.com/api/v1/authentication/sign-in', payload)
       .subscribe({
         next: (res) => {
           const token = res.accessToken;

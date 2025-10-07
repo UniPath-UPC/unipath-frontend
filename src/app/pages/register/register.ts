@@ -36,7 +36,7 @@ export class RegisterComponent {
   }
 
   cargarColegios() {
-    this.http.get<any[]>('http://localhost:8080/api/v1/school').subscribe({
+    this.http.get<any[]>('https://unipath-backend-1073d69ce58b.herokuapp.com/api/v1/school').subscribe({
       next: (data) => {
         this.schools = data;
       },
@@ -101,7 +101,7 @@ export class RegisterComponent {
     };
     console.log('🔼 JSON que se envía al backend:', payload);
     this.http
-      .post('http://localhost:8080/api/v1/authentication/sign-up', payload)
+      .post('https://unipath-backend-1073d69ce58b.herokuapp.com/api/v1/authentication/sign-up', payload)
       .subscribe({
         next: (res) => {
           this.mostrarToast = true;

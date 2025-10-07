@@ -161,7 +161,7 @@ export class ReporteTestsComponent implements OnInit {
     const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
 
     // 1) Datos de la tabla
-    this.http.get<any[]>(`http://localhost:8080/api/v1/test/list_test_docente/${userId}`, { headers })
+    this.http.get<any[]>(`https://unipath-backend-1073d69ce58b.herokuapp.com/api/v1/test/list_test_docente/${userId}`, { headers })
       .subscribe({
         next: (data) => {
           this.tests = data;
@@ -171,7 +171,7 @@ export class ReporteTestsComponent implements OnInit {
       });
 
     // 2) Datos para los gráficos
-    this.http.get<any[]>(`http://localhost:8080/api/v1/test/reports_info/${userId}`, { headers })
+    this.http.get<any[]>(`https://unipath-backend-1073d69ce58b.herokuapp.com/api/v1/test/reports_info/${userId}`, { headers })
       .subscribe({
         next: (data) => {
           this.reportsInfo = data || [];
@@ -181,7 +181,7 @@ export class ReporteTestsComponent implements OnInit {
         error: (err) => console.error('Error al obtener reports_info:', err)
       });
       // 3) Datos del usuario en sesión
-    this.http.get<any>(`http://localhost:8080/api/v1/user/${userId}`, { headers })
+    this.http.get<any>(`https://unipath-backend-1073d69ce58b.herokuapp.com/api/v1/user/${userId}`, { headers })
       .subscribe({
         next: (user) => {
           this.isDirector = user?.role?.id === 4;

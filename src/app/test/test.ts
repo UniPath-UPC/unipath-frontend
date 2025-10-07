@@ -334,7 +334,7 @@ export class TestComponent implements OnInit {
 
     // Enviar el JSON al servidor
     this.http
-      .post<any>(`http://localhost:8080/api/v1/test/${userId}`, jsonResultado, {
+      .post<any>(`https://unipath-backend-1073d69ce58b.herokuapp.com/api/v1/test/${userId}`, jsonResultado, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
