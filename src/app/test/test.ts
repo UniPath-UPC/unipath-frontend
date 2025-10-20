@@ -332,6 +332,8 @@ export class TestComponent implements OnInit {
     // Generar el JSON para enviar
     const jsonResultado = this.generarJSONFinal();
 
+
+    //Prueba Enviar el JSON al servidor
     // Enviar el JSON al servidor
     this.http
       .post<any>(`https://unipath-backend-1073d69ce58b.herokuapp.com/api/v1/test/${userId}`, jsonResultado, {
