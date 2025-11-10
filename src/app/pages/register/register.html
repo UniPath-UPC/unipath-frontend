@@ -63,20 +63,38 @@
             />
           </div>
           <!-- Contraseña -->
+          <!-- Contraseña -->
           <div class="form-group mb-2">
-            <label for="password" class="form-label"
-              >Contraseña<span class="requiredText">*</span></label
-            >
-            <input
-              type="password"
-              class="form-control"
-              id="password"
-              name="password"
-              [(ngModel)]="password"
-              placeholder="Contraseña"
-              (input)="validatePassword()"
-              required
-            />
+            <label for="password" class="form-label">
+              Contraseña<span class="requiredText">*</span>
+            </label>
+
+            <div class="input-password-wrapper">
+              <input
+                [type]="verPassword ? 'text' : 'password'"
+                class="form-control"
+                id="password"
+                name="password"
+                [(ngModel)]="password"
+                placeholder="Contraseña"
+                (input)="validatePassword()"
+                required
+              />
+
+              <!-- Botón de mostrar/ocultar -->
+              <button
+                class="password-toggle"
+                (click)="verPassword = !verPassword"
+                type="button"
+                aria-label="Mostrar u ocultar contraseña"
+              >
+                <i
+                  [ngClass]="verPassword ? 'bi bi-eye-slash-fill' : 'bi bi-eye-fill'"
+                ></i>
+              </button>
+            </div>
+
+            <!-- Validaciones visuales -->
             <div *ngIf="passwordTouched" class="mt-1">
               <small
                 [ngClass]="{ 'valid': isLengthValid, 'invalid': !isLengthValid }"
@@ -91,20 +109,36 @@
               </small>
             </div>
           </div>
+
           <!-- Repetir contraseña -->
           <div class="form-group mb-3">
-            <label for="confirm-password" class="form-label"
-              >Repetir contraseña<span class="requiredText">*</span></label
-            >
-            <input
-              type="password"
-              class="form-control"
-              id="confirm-password"
-              placeholder="Repite tu contraseña"
-              name="confirmPassword"
-              [(ngModel)]="confirmPassword"
-              required
-            />
+            <label for="confirm-password" class="form-label">
+              Repetir contraseña<span class="requiredText">*</span>
+            </label>
+
+            <div class="input-password-wrapper">
+              <input
+                [type]="verConfirmacion ? 'text' : 'password'"
+                class="form-control"
+                id="confirm-password"
+                name="confirmPassword"
+                placeholder="Repite tu contraseña"
+                [(ngModel)]="confirmPassword"
+                required
+              />
+
+              <!-- Botón de mostrar/ocultar -->
+              <button
+                class="password-toggle"
+                type="button"
+                (click)="verConfirmacion = !verConfirmacion"
+                aria-label="Mostrar u ocultar confirmación"
+              >
+                <i
+                  [ngClass]="verConfirmacion ? 'bi bi-eye-slash-fill' : 'bi bi-eye-fill'"
+                ></i>
+              </button>
+            </div>
           </div>
 
           <!-- Fecha de nacimiento -->

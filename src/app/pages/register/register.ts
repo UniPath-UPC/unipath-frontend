@@ -30,6 +30,8 @@ export class RegisterComponent {
   isLengthValid: boolean = false;
   hasUppercase: boolean = false;
   passwordTouched: boolean = false;
+  verPassword = false;
+  verConfirmacion = false;
 
   fechaHoy: string = new Date().toISOString().split('T')[0];
 

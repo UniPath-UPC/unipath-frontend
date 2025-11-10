@@ -172,6 +172,35 @@ select.form-control {
   min-width: 320px;
   text-align: center;
 }
+/* Contenedor para el input con el botón */
+.input-password-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.input-password-wrapper input {
+  width: 100%;
+  padding-right: 2.5rem; /* espacio para el icono */
+}
+
+/* Botón del ojo */
+.password-toggle {
+  position: absolute;
+  right: 10px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  color: #666;
+  font-size: 1.2rem;
+  display: flex;
+  align-items: center;
+}
+
+.password-toggle:hover {
+  color: var(--highlight-blue, #007bff);
+}
+
 
 /* ANIMACIONES */
 
