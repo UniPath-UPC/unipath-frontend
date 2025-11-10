@@ -32,7 +32,7 @@ export class InfoUserComponent implements OnInit {
     if (token && userId) {
       const headers = new HttpHeaders({ Authorization: `Bearer ${token}` });
 
-      this.http.get<any>(`http://localhost:8080/api/v1/user/${userId}`, { headers }).subscribe({
+      this.http.get<any>(`https://unipath-backend-1073d69ce58b.herokuapp.com/api/v1/user/${userId}`, { headers }).subscribe({
         next: (user) => {
           this.nombre = user.name;
           this.apellido = user.lastName;
@@ -93,11 +93,11 @@ export class InfoUserComponent implements OnInit {
     };
     console.log('🔼 JSON que se envía al backend:', payload);
 
-    this.http.put<any>(`http://localhost:8080/api/v1/user/${userId}`, payload, { headers }).subscribe({
+    this.http.put<any>(`https://unipath-backend-1073d69ce58b.herokuapp.com/api/v1/user/${userId}`, payload, { headers }).subscribe({
       next: (res) => {
         this.modoEdicion = false;
         this.datosOriginales = { ...res };
-        this.http.get<any>(`http://localhost:8080/api/v1/user/${userId}`, { headers }).subscribe({
+        this.http.get<any>(`https://unipath-backend-1073d69ce58b.herokuapp.com/api/v1/user/${userId}`, { headers }).subscribe({
         next: (user) => {
           this.nombre = user.name;
           this.apellido = user.lastName;

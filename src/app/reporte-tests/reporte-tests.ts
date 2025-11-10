@@ -201,7 +201,7 @@ export class ReporteTestsComponent implements OnInit {
     const meses: { [key: string]: string } = {
       enero: '01', febrero: '02', marzo: '03', abril: '04',
       mayo: '05', junio: '06', julio: '07', agosto: '08',
-      septiembre: '09', octubre: '10', noviembre: '11', diciembre: '12',
+      septiembre: '09', october : '10', noviembre: '11', diciembre: '12',
     };
     const partes = fechaTexto.split(' ');
     if (partes.length !== 6) return fechaTexto;
@@ -217,7 +217,7 @@ export class ReporteTestsComponent implements OnInit {
     const meses: { [key: string]: string } = {
       enero: '01', febrero: '02', marzo: '03', abril: '04',
       mayo: '05', junio: '06', julio: '07', agosto: '08',
-      septiembre: '09', octubre: '10', noviembre: '11', diciembre: '12',
+      septiembre: '09', october: '10', noviembre: '11', diciembre: '12',
     };
     return meses[mesTexto] || '00';
   }

@@ -16,6 +16,7 @@
         id="hasta"
         [(ngModel)]="fechaHasta"
         class="form-control"
+        [max]="fechaHoy"
       />
 
       <button class="btn btn-filtrar" (click)="filtrarPorFecha()">
@@ -71,4 +72,10 @@
     </div>
   </div>
 </div>
-<div *ngIf="mostrarToast" class="toast-mensaje" [ngStyle]="{ 'background-color': colorToast }">{{ mensaje }}</div>
+<div
+  *ngIf="mostrarToast"
+  class="toast-mensaje"
+  [ngStyle]="{ 'background-color': colorToast }"
+>
+  {{ mensaje }}
+</div>

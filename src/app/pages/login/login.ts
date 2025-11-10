@@ -16,6 +16,7 @@ export class LoginComponent {
   email: string = '';
   password: string = '';
   mostrarToast: boolean = false;
+  verPassword = false;
   toastMessage: string = 'Inicio de sesión exitoso';
   colorToast: string = 'var(--green-true-color)';
   constructor(private http: HttpClient, private router: Router) {}

@@ -20,6 +20,9 @@ export class HistorialTestsComponent implements OnInit {
   fechaHasta: string = '';
   testsFiltrados: any[] = [];
   colorToast: string = 'var(--green-true-color)';
+  
+  fechaHoy: string = new Date().toISOString().split('T')[0];
+
 
   constructor(private http: HttpClient, private router: Router) {}
 

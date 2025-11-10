@@ -31,6 +31,9 @@ export class RegisterComponent {
   hasUppercase: boolean = false;
   passwordTouched: boolean = false;
 
+  fechaHoy: string = new Date().toISOString().split('T')[0];
+
+
     ngOnInit() {
     this.cargarColegios();
   }
